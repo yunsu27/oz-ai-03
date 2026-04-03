@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="name" placeholder="이름 입력...">
+    <button id="save">저장</button>
+    <button id="save">리셋</button>
+    <p id="result"></p>
+
+    <script>
+        // 한 번 이름을 저장하면, 브라우저를 닫았다가 열어도 이름이 유지되게 하기
+        const input = document.querySelector("#name");
+        const button = document.querySelector("#save");
+        const resetButton = document.querySelector("#reset")
+        const result = document.querySelector("#result");
+
+        // DOM 그릴 때, 로컬 스토리를 읽어서 저장된 이름이 있으면 출력
+        const savedUser = localStorage.getItem("name");
+        if (savedUser) {
+            result.textContent = savedUser;
+        };
+
+        // input 값 -> p 텍스트로 반영
+        button.addEventListener("click", () => {
+            // 캐싱(caching) = 임시 저장소에 데이터를 저장하는 기술
+            localStorage.setItem("name", input.value);
+            result.textContent = input.value;
+        });
+
+        resetButton.addEventListener("click", () => {
+            localStorage.removeItem("name");
+            result.textContent = "";
+        });
+
+        // 리셋 버튼을 누르면, 이름 리셋
+    </script>
+</body>
+</html>
